@@ -1,5 +1,5 @@
 module Counter
 
-# Write your package code here.
+include("Domain.jl"); using .Domain
 
 end

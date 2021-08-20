@@ -3,6 +3,9 @@ uuid = "61de0a79-5d41-432d-9abd-cdef26125b7f"
 authors = ["rbontekoe <rbontekoe@appligate.nl> and contributors"]
 version = "0.1.0"
 
+[deps]
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+
 [compat]
 julia = "1"
 
