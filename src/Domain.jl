@@ -1,10 +1,10 @@
-module Domain #1
+module Domain
 
-using Dates #2
+using Dates
 
 export Item
 
-struct Item #7
+struct Item
   created::DateTime
   name::String
   nbr::Int64
