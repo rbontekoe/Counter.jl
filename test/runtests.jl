@@ -30,3 +30,12 @@ FILE_COUNTER = "./test_counter.txt"
     cmd = `rm $FILE_COUNTER`
     run(cmd)
 end
+
+@testset "create_new_invoice_nbr" begin
+    ar_1000 = create("ar", 1000)
+    add_to_file(FILE_COUNTER, [ar_1000])
+    item = create_new_invoice_nbr(FILE_COUNTER)
+    @test item.nbr == 1001
+    cmd = `rm $FILE_COUNTER`
+    run(cmd)
+end
