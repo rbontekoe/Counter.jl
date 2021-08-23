@@ -19,25 +19,27 @@ function read_from_file(file::String)
     close(io)
 
     return r
-end
+end # read_from_file
 
-function add_to_file(file::String, data::Array{T, 1} where T <: Item)
+function add_to_file(file::String, data::Array{T, 1} where T <: Any)
     io = open(file, "a+")
 
     [serialize(io, r) for r in data]
 
     close(io)
-end
+end # add_to_file
 
 function create_new_invoice_nbr(file::String)
-    result = read_from_file(file)
-    last_item = last(result)
-    invoice_nbr = last_item.nbr
-    invoice_nbr += 1
-    name = haskey(ENV, "HOSTNAME") ? split(ENV["HOSTNAME"], "-")[1] * split(ENV["HOSTNAME"], "-")[3] : "A"
-    item = create(name, invoice_nbr)
-    add_to_file(file, [item])
-    return item
-end
+    value = 1000
+    try
+        value = last(read_from_file(file))
+    catch e
+        add_to_file(file, [value])
+    end
 
-end
+    invoice_nbr = value += 1
+    add_to_file(file, [invoice_nbr])
+    return invoice_nbr
+end # create_new_invoice_nbr
+
+end # module
